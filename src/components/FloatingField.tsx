@@ -28,7 +28,7 @@ export const FloatingField = forwardRef<HTMLInputElement, FloatingFieldProps>(fu
             aria-invalid={Boolean(error)}
             aria-describedby={error ? `${inputId}-error` : undefined}
             className={cn(
-              "peer h-14 w-full rounded-2xl border border-white/10 bg-white/[0.045] px-4 pt-5 text-sm text-white outline-none backdrop-blur-xl transition duration-200 placeholder:text-transparent focus:border-violet-400/70 focus:bg-white/[0.065] focus:shadow-[0_0_0_1px_rgba(124,92,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60",
+              "peer h-10 w-full rounded-2xl border border-white/10 bg-white/[0.045] px-4 pt-5 text-sm text-white outline-none backdrop-blur-xl transition duration-200 placeholder:text-transparent focus:border-violet-400/70 focus:bg-white/[0.065] focus:shadow-[0_0_0_1px_rgba(124,92,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60 sm:h-11",
               prefix ? "pl-16" : "pl-4",
               suffix ? "pr-12" : "pr-4",
               error && "border-rose-400/70 focus:border-rose-400/70 focus:shadow-[0_0_0_1px_rgba(251,113,133,0.22)]",

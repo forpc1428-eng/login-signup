@@ -62,19 +62,19 @@ export function AuthPanel({
   return (
     <SpotlightCard
       spotlightColor="rgba(75, 99, 233, 0.16)"
-      className="w-full max-w-xl rounded-[30px] border border-white/10 bg-white/[0.05] p-4 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:p-6"
+      className="w-full max-w-sm rounded-[28px] border border-white/10 bg-white/[0.05] p-2.5 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:max-w-md sm:p-4"
     >
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
             {mode === "signup" ? "Create account" : "Sign in"}
           </h2>
         </div>
-        <div className="flex flex-row gap-3 sm:items-center">
+        <div className="ml-auto flex items-center gap-2.5 sm:ml-0">
           <button
             type="button"
             onClick={onToggleMode}
-            className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-white/70 transition hover:border-violet-400/40 hover:text-white"
+            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/70 transition hover:border-violet-400/40 hover:text-white sm:px-3 sm:text-[11px]"
           >
             {secondaryAction}
           </button>
@@ -85,7 +85,7 @@ export function AuthPanel({
         {status ? <MessageBanner key={status.message} tone={status.tone} message={status.message} /> : null}
       </AnimatePresence>
 
-      <form onSubmit={onSubmit} className="mt-5 space-y-4">
+      <form onSubmit={onSubmit} className="mt-4 space-y-3">
         <AnimatePresence mode="wait" initial={false}>
           {mode === "signup" ? (
             <motion.div
@@ -215,7 +215,7 @@ export function AuthPanel({
           whileHover={loading ? undefined : { scale: 1.01 }}
           whileTap={loading ? undefined : { scale: 0.99 }}
           transition={{ type: "spring", stiffness: 220, damping: 18 }}
-          className="group relative flex h-14 w-full items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-r from-violet-500 to-indigo-500 px-5 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(124,92,255,0.28)] transition disabled:cursor-not-allowed disabled:opacity-80"
+          className="group relative flex h-11 w-full items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-r from-violet-500 to-indigo-500 px-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(124,92,255,0.28)] transition disabled:cursor-not-allowed disabled:opacity-80 sm:h-12 sm:px-5"
         >
           <span className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_58%)] opacity-0 transition group-hover:opacity-100" />
           <AnimatePresence mode="wait" initial={false}>

@@ -1,34 +1,75 @@
-name: Build and deploy
+# ============================================================
+# React Google Sheets Authentication — Automatic GitHub Pages Deployment
+#
+# Triggers on every push to `main`.
+# Builds the Vite project and deploys to GitHub Pages
+# using the modern Pages API (no gh-pages branch needed).
+#
+# Setup (one-time):
+#   1. Push this repo to GitHub
+#   2. Go to Settings → Pages → Source → "GitHub Actions"
+#   3. That's it — every push auto-deploys
+# ============================================================
+
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
-      - master
+
+# Sets permissions for the GITHUB_TOKEN
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only allow one deployment at a time — cancels in-progress runs
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
+  # ---- Build ----
   build:
-    name: Build app
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v5
+      # 2. Setup Node.js with npm cache for fast installs
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: npm
 
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      # 4. Build the production bundle
       - name: Build project
         run: npm run build
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      # 5. Upload the dist folder as a Pages artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: dist
-          path: dist
+          path: ./dist
+
+  # ---- Deploy ----
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

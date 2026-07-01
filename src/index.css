@@ -18,12 +18,13 @@ html,
 body,
 #root {
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  overflow-x: hidden;
+  width: 100%;
   background: #0e0e11;
 }
 
